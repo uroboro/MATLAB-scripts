@@ -1,20 +1,20 @@
 function [ output_args ] = main(varargin)
-    output_args = 1;
-    
-    % argumentos:
+	output_args = 1;
+	
+	% argumentos:
 	%	modo:
 	%	orden: orden minimo / orden del 1er filtro en modo 4-6
 	%	orden: orden maximo / orden del 2do filtro en modo 4-6
 	%	Wc: w de corte
 	%	Rp: Chebyshev Ripple (dB)
-    defaults = [1, 1, 1, 1, 1];
+	defaults = [1, 1, 1, 1, 1];
 	for i = 1:nargin % nargin es el tamaño de vararin
-        % copio los argumentos que existen.
+		% copio los argumentos que existen.
 		defaults(i) = varargin{i};
 	end
-    
+	
 	modo = defaults(1);
-    ordenMin = defaults(2);
+	ordenMin = defaults(2);
 	ordenMax = defaults(3);
 	Wc = defaults(4);
 	Rp = defaults(5);
@@ -22,8 +22,8 @@ function [ output_args ] = main(varargin)
 	a = 'butterworth orden-';
 	b = 'chebyshev orden-';
 	c = 'bessel orden-';
-    
-    strv={};
+	
+	strv={};
 
 	switch (modo)
 
