@@ -7,9 +7,17 @@
 %
 % Ambos vectores deben tener la misma cantidad de elementos
 
-function analisis_filtro(sysv, legend_str)
+function analisis_filtro(sysv, legend_str, varargin)
 	N = length(legend_str);
 
+	b_zpk = 1;
+	i_s = 1;
+	if (nargin)
+		b_zpk = bitand(varargin{1}, 1);
+		i_s = bitand(varargin{1}, 2);
+	end
+	
+	if (b_zpk)
 	figure('Name', 'Bode y Polos-Zeros');
 	% BODE
 	subplot(1,2,1);
@@ -29,8 +37,10 @@ function analisis_filtro(sysv, legend_str)
 	end
 	legend(legend_str);
 	grid on;
-	hold off; 
+	hold off;
+	end
 
+	if (i_s)
 	figure('Name', 'Impulse y Step');
 	%RESPUESTA AL IMPULSO
 	subplot(1,2,1);
@@ -51,5 +61,6 @@ function analisis_filtro(sysv, legend_str)
 	legend(legend_str);
 	grid on;
 	hold off;
+	end
 
 end
