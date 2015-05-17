@@ -18,49 +18,49 @@ function analisis_filtro(sysv, legend_str, varargin)
 	end
 	
 	if (b_zpk)
-	figure('Name', 'Bode y Polos-Zeros');
-	% BODE
-	subplot(1,2,1);
-	hold on;
-	for i=1:N
-		bode(sysv(i));
-	end
-	legend(legend_str);
-	grid on;
-	hold off;
+		figure('Name', 'Bode y Polos-Zeros');
+		% BODE
+		subplot(1,2,1);
+		hold on;
+		for i=1:N
+			bode(sysv(i));
+		end
+		legend(legend_str);
+		grid on;
+		hold off;
 
-	%POLOS Y CEROS
-	subplot(1,2,2);
-	hold on;
-	for i=1:N
-		pzmap(sysv(i));
-	end
-	legend(legend_str);
-	grid on;
-	hold off;
+		%POLOS Y CEROS
+		subplot(1,2,2);
+		hold on;
+		for i=1:N
+			pzmap(sysv(i));
+		end
+		legend(legend_str);
+		grid on;
+		hold off;
 	end
 
 	if (i_s)
-	figure('Name', 'Impulse y Step');
-	%RESPUESTA AL IMPULSO
-	subplot(1,2,1);
-	hold on;
-	for i=1:N
-		impulse(sysv(i));
-	end
-	legend(legend_str);
-	grid on;
-	hold off;
+		figure('Name', 'Impulse y Step');
+		%RESPUESTA AL IMPULSO
+		subplot(1,2,1);
+		hold on;
+		for i=1:N
+			impulse(sysv(i));
+		end
+		legend(legend_str);
+		grid on;
+		hold off;
 
-	%RESPUESTA AL ESCALON
-	subplot(1,2,2);
-	hold on;
-	for i=1:N
-		step(sysv(i));
-	end
-	legend(legend_str);
-	grid on;
-	hold off;
+		%RESPUESTA AL ESCALON
+		subplot(1,2,2);
+		hold on;
+		for i=1:N
+			step(sysv(i));
+		end
+		legend(legend_str);
+		grid on;
+		hold off;
 	end
 
 end
