@@ -38,7 +38,7 @@ function [ output_args ] = main(varargin)
 	% Chebyshev de ordenMin a ordenMax en Wn
 	case 2
 		for i = ordenMin:ordenMax
-			sysv(1 + i-ordenMin) = cheb1Sys(i, Wc, Rp);
+			sysv(1 + i-ordenMin) = cheby1Sys(i, Wc, Rp);
 			titulo = {'chebyshev'};
 			strv = [strv; strcat( titulo ,' - orden ', num2str(i) )];
 		end
@@ -54,7 +54,7 @@ function [ output_args ] = main(varargin)
 	% Butterworth de ordenMin vs Chebyshev de ordenMax en Wn
 	case 4
 		sysv(1) = butterSys(ordenMin, Wc, 's');
-		sysv(2) = cheb1Sys(ordenMax, Wc, Rp);
+		sysv(2) = cheby1Sys(ordenMax, Wc, Rp);
 		strv = {strcat(a, num2str(ordenMin)); strcat(b, num2str(ordenMax))};
 
 	% Butterworth de ordenMin vs Bessel de ordenMax en Wn
