@@ -1,22 +1,24 @@
+% Herramienta de comparacion de filtros
+%
+% Argumentos: array de enteros representando los siguientes valores
+%	modo:
+%		1: Butterworth de ordenMin a ordenMax en Wn
+%		2: Chebyshev de ordenMin a ordenMax en Wn
+%		3: Bessel de ordenMin a ordenMax en Wn
+%		4: Butterworth de ordenMin vs Chebyshev de ordenMax en Wn
+%		5: Butterworth de ordenMin vs Bessel de ordenMax en Wn
+%		6: Chevyshev de ordenMin vs Bessel de ordenMax en Wn
+%	orden: orden minimo / orden del 1er filtro en modo 4-6
+%	orden: orden maximo / orden del 2do filtro en modo 4-6
+%	Wc: w de corte
+%	Rp: Chebyshev Ripple (dB)
+%	af_modo: modo de analisis (mascara de bits)
+%		01: bode y mapa zpk
+%		10: rta a impulso y escalon
+
 function [ output_args ] = main(varargin)
 	output_args = 1;
 	
-	% argumentos:
-	%	modo:
-	%		1: Butterworth de ordenMin a ordenMax en Wn
-	%		2: Chebyshev de ordenMin a ordenMax en Wn
-	%		3: Bessel de ordenMin a ordenMax en Wn
-	%		4: Butterworth de ordenMin vs Chebyshev de ordenMax en Wn
-	%		5: Butterworth de ordenMin vs Bessel de ordenMax en Wn
-	%		6: Chevyshev de ordenMin vs Bessel de ordenMax en Wn
-	%	orden: orden minimo / orden del 1er filtro en modo 4-6
-	%	orden: orden maximo / orden del 2do filtro en modo 4-6
-	%	Wc: w de corte
-	%	Rp: Chebyshev Ripple (dB)
-	%	af_modo: modo de analisis (mascara de bits)
-	%		01: bode y mapa zpk
-	%		10: rta a impulso y escalon
-
 	defaults = [1, 1, 1, 1, 3, 3];
 	for i = 1:nargin % nargin es el tamaño de vararin
 		% copio los argumentos que existen.
