@@ -20,7 +20,7 @@ function [ output_args ] = main(varargin)
 	output_args = 1;
 	
 	defaults = [1, 1, 1, 1, 3, 3];
-	for i = 1:nargin % nargin es el tamaño de vararin
+	for i = 1:nargin % nargin es el tamaño de varargin
 		% copio los argumentos que existen.
 		defaults(i) = varargin{i};
 	end
