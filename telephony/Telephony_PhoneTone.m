@@ -2,8 +2,10 @@
 %	key: phonepad key: (0-9, *, #, A-D)
 %	samples: samples quantity
 %	sampleRate: Sample
-function [ data ] = Telephony_PhoneTone(key, samples, sampleRate)
-	t = 0 : 1 / sampleRate : (samples - 1) / sampleRate;
+function [ data, time ] = Telephony_PhoneTone(samples, samplingFrequency, key)
 	[fA, fB] = Telephony_PhoneFrequenciesForButton(key);
-	data = UFS_PureTone(fA, 0.875, t) + UFS_PureTone(fB, 0.875, t);
+	[ data1, time1 ] = Signal_GenerateSine(samples, samplingFrequency, 1, fA);
+	[ data2, time2 ] = Signal_GenerateSine(samples, samplingFrequency, 1, fB);
+	data = data1 + data2;
+	time = time1 + time2;
 end
