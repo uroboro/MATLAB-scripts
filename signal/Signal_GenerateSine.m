@@ -1,7 +1,7 @@
-% Generar tono puro a partir de la frecuencia especificada
-%	f: frecuencia del audio a generar
-%	A: maximo del audio a generar
-%	t: vector temporal
-function [ out ] = Signal_GenerateSine(f, A, t)
-	out = A * sin(2 * pi / f * t);
+% Generate sine wave
+function [ out, time ] = Signal_GenerateSine( amplitude, frequency, phase, offset, samples, samplingFrequency )
+    time = 0:1/samplingFrequency:(samples - 1) / samplingFrequency;
+%    time = linspace(0, (samples - 1) / samplingFrequency, samplingFrequency);
+    time = time.';
+    out = offset + amplitude * sin(2 * pi * frequency * time + phase);
 end

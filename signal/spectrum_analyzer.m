@@ -5,13 +5,28 @@ if (read == 1)
 	Audio_Play(file, data, freq);
 	dataLeft = data(:, 1);
 else
-	T = 441 * 20;
+    freq = 44100;
+	T = 441;
 	dataLeft = [];
-	dataLeft = [dataLeft (Signal_GenerateSine(20, 0.6, 1:T) + Signal_GenerateSine(50, 0.3, 1:T))];
-	dataLeft = [dataLeft (Signal_GenerateSine(30, 0.6, 1:T) + Signal_GenerateSine(45, 0.3, 1:T))];
-	dataLeft = [dataLeft (Signal_GenerateSine(15, 0.6, 1:T) + Signal_GenerateSine(40, 0.3, 1:T))];
-	dataLeft = [dataLeft (Signal_GenerateSine(25, 0.6, 1:T) + Signal_GenerateSine(85, 0.3, 1:T))];
-	sound(dataLeft, 44100);
+    T_ = 0:1/freq:((T-1)/freq);
+    dataLeft = [dataLeft (0.6*sin(2*pi* 100 * T_) + 0.3*sin(2*pi* 500 * T_))];
+    dataLeft = [dataLeft (0.6*sin(2*pi* 200 * T_) + 0.3*sin(2*pi* 600 * T_))];
+    dataLeft = [dataLeft (0.6*sin(2*pi* 300 * T_) + 0.3*sin(2*pi* 700 * T_))];
+    dataLeft = [dataLeft (0.6*sin(2*pi* 400 * T_) + 0.3*sin(2*pi* 800 * T_))];
+
+%     [s1, ~] = Signal_GenerateSine(0.6, 200, 0, 0, T, freq);
+%     [s2, ~] = Signal_GenerateSine(0.3, 500, 0, 0, T, freq);
+%  	dataLeft = [dataLeft s1+s2];
+%     [s1, ~] = Signal_GenerateSine(0.6, 300, 0, 0, T, freq);
+%     [s2, ~] = Signal_GenerateSine(0.3, 450, 0, 0, T, freq);
+%  	dataLeft = [dataLeft s1+s2];
+%     [s1, ~] = Signal_GenerateSine(0.6, 150, 0, 0, T, freq);
+%     [s2, ~] = Signal_GenerateSine(0.3, 400, 0, 0, T, freq);
+%  	dataLeft = [dataLeft s1+s2];
+%     [s1, ~] = Signal_GenerateSine(0.6, 250, 0, 0, T, freq);
+%     [s2, ~] = Signal_GenerateSine(0.3, 850, 0, 0, T, freq);
+%  	dataLeft = [dataLeft s1+s2];
+	%sound(dataLeft, freq);
 end
 figure(1)
 subplot(2, 1, 1);
