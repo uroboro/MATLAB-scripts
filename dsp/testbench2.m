@@ -1,4 +1,4 @@
-function testbench()
+function testbench2()
 %TESTBENCH Summary of this function goes here
 %   Detailed explanation goes here
     samples = 100;
