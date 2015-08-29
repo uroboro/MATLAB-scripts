@@ -12,7 +12,7 @@ function [ output_args ] = Image_SimulateQuantificationError( image, colorDepth 
 	for x = 1:1:rows
 		for y = 1:1:cols
 			a = tmp(x, y);
-			tmp(x, y) = a-mod(a,2^(8-colorDepth))-1;
+			tmp(x, y) = a - mod(a, 2^(8-colorDepth)) - 1;
 		end
 	end
 
