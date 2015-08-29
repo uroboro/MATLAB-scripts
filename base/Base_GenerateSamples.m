@@ -5,7 +5,6 @@ function [ output_args ] = Base_GenerateSamples( samples, samplingFrequency )
 		error('Sampling error: sampling frequency must be greater than 1.');
 	end
 	samples = floor(samples);
-	samplingFrequency = floor(samplingFrequency);
 
 	tmp = 0 : 1 / samplingFrequency : (samples - 1) / samplingFrequency;
 	output_args = transpose(tmp);
