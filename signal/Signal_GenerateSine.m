@@ -12,14 +12,14 @@ function [ data, time ] = Signal_GenerateSine( samples, samplingFrequency, ampli
 	phase = defaults(1);
 	offset = defaults(2);
 
-	if (samplingFrequency/2 <= frequency)
-		error('Sampling error: (50%) sampling frequency cannot be lower than signal frequency');
-	end
-	if (samplingFrequency <= 8000)
-		warning('Sampling warning: sampling frequency will be upped to telephone sampling frequency (8kHz). Samples will be proportionally be increased.');
-		samples = samples * 8000 / samplingFrequency;
-		samplingFrequency = 8000;
-	end
+% 	if (samplingFrequency/2 <= frequency)
+% 		error('Sampling error: (50%) sampling frequency cannot be lower than signal frequency');
+% 	end
+% 	if (samplingFrequency <= 8000)
+% 		warning('Sampling warning: sampling frequency will be upped to telephone sampling frequency (8kHz). Samples will be proportionally be increased.');
+% 		samples = samples * 8000 / samplingFrequency;
+% 		samplingFrequency = 8000;
+% 	end
 
 	time = Base_GenerateSamples(samples, samplingFrequency);
     data = offset + amplitude * sin(2 * pi * frequency * time + phase);
