@@ -2,7 +2,6 @@
 % Usage:
 %       image = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency);
 %       image = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency, phase);
-%       image = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency, phase, offset);
 function [ data, time ] = Signal_GenerateSine( samples, samplingFrequency, amplitude, frequency, varargin )
 	defaults = [0, 0];
 	for i = 1:length(varargin)
@@ -10,7 +9,6 @@ function [ data, time ] = Signal_GenerateSine( samples, samplingFrequency, ampli
 		defaults(i) = varargin{i};
 	end
 	phase = defaults(1);
-	offset = defaults(2);
 
 % 	if (samplingFrequency/2 <= frequency)
 % 		error('Sampling error: (50%) sampling frequency cannot be lower than signal frequency');
@@ -22,5 +20,5 @@ function [ data, time ] = Signal_GenerateSine( samples, samplingFrequency, ampli
 % 	end
 
 	time = Base_GenerateSamples(samples, samplingFrequency);
-    data = offset + amplitude * sin(2 * pi * frequency * time + phase);
+    data = amplitude * sin(2 * pi * frequency * time + phase);
 end
