@@ -1,7 +1,8 @@
 % Generate square wave
-%       image = Signal_GenerateSquare(samples, samplingFrequency, amplitude, frequency);
-%       image = Signal_GenerateSquare(samples, samplingFrequency, amplitude, frequency, percentageOn);
-%       image = Signal_GenerateSquare(samples, samplingFrequency, amplitude, frequency, percentageOn, phase);
+% Usage:
+%       signal = Signal_GenerateSquare(samples, samplingFrequency, amplitude, frequency);
+%       signal = Signal_GenerateSquare(samples, samplingFrequency, amplitude, frequency, percentageOn);
+%       signal = Signal_GenerateSquare(samples, samplingFrequency, amplitude, frequency, percentageOn, phase);
 function [ out, time ] = Signal_GenerateSquare( samples, samplingFrequency, amplitude, frequency, varargin )
 	defaults = [0.5, 0, 0];
 	for i = 1:length(varargin)
