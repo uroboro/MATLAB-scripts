@@ -1,7 +1,7 @@
 % Generate sine wave
 % Usage:
-%       image = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency);
-%       image = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency, phase);
+%       signal = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency);
+%       signal = Signal_GenerateSine(samples, samplingFrequency, amplitude, frequency, phase);
 function [ data, time ] = Signal_GenerateSine( samples, samplingFrequency, amplitude, frequency, varargin )
 	defaults = [0, 0];
 	for i = 1:length(varargin)
