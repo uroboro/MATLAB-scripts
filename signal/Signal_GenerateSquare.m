@@ -14,7 +14,7 @@ function [ out, time ] = Signal_GenerateSquare( samples, samplingFrequency, ampl
 
 	time = Base_GenerateSamples(samples, samplingFrequency);
     cycle = 1/frequency;
-	tmp = mod(time, cycle);
+	tmp = mod(time + phase, cycle);
 	for i = 1:length(time);
 		tmp(i) = (tmp(i) < percentage * cycle);
 	end
