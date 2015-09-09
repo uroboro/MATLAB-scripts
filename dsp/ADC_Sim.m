@@ -1,8 +1,9 @@
-%ADC_SIM Simulate ADC sampling error
-%   Detailed explanation goes here lol
-function [ Sk, noise, nk ] = ADC_Sim( amplitude, samples, samplingFrequency )
+% ADC_SIM Simulate ADC sampling error
+% Usage:
+%	[ Sk, noise, nk ] = ADC_Sim(samples, samplingFrequency, amplitude)
+function [ Sk, noise, nk ] = ADC_Sim(samples, samplingFrequency, amplitude)
     %figure(1);
-    [ Sk, ~ ] = Signal_GenerateSine(amplitude, 10, 0, 0, samples, samplingFrequency);
+    [ Sk, ~ ] = Signal_GenerateSine(samples, samplingFrequency, amplitude, 10);
     %subplot(2, 3, 1); plot(Sk); title('Sk');
     
     u = 0;
@@ -13,13 +14,7 @@ function [ Sk, noise, nk ] = ADC_Sim( amplitude, samples, samplingFrequency )
     sum = Sk + noise;
     %subplot(2, 3, 3); plot(sum); title('Sum');
 
-    rounded = round(sum);
-    %subplot(2, 3, 4); plot(rounded); title('rounded');
-
-    int = int8(rounded);
-    %subplot(2, 3, 5); plot(int); title('int');
-
-    nk = sum - double(int);
+    nk = sum - double(int8(round(sum)));
     %subplot(2, 3, 6); plot(nk); title('nk');
 
 end
