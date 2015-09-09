@@ -1,21 +1,31 @@
 %TESTBENCH3 Summary of this function goes here
 %   Detailed explanation goes here
 function [ output_args ] = testbench3( input_args )
-% 	N = 10;
-% 	W = [];
-% 	Y = [];
-% 	Z = [];
-% 	for i = linspace(0,0.5,N)
-% 		[w, y, z] = test3(i);
-% 		W = [W; w];
-% 		Y = [Y; y];
-% 		Z = [Z; z];
-% 	end
-% %	plot3(linspace(0,0.5,N), length(W()), W());
-% end
-% 
-% function [W, Y, Z] = test3(dd)
-close all;
+	close all;
+	N = 100;
+	fs = 100;
+	f = round(N/4);
+	if 0
+		[X, T] = Signal_GenerateSine(N, fs, 1, f);
+		[W, F] = myDFT(X, 1);
+		stem(abs(W));
+		d = [0.01, 0.25, 0.5];
+		figure;
+		for i = 1:length(d)
+			[X, T] = Signal_GenerateSine(N, fs, 1, f+d(i));
+			[W, F] = myDFT(X, 1);
+			subplot(3, 1, i);
+			stem(F, abs(W));
+		end
+	end
+	M = [N/10, N, N*10];
+	for i = 1:length(M)
+		[X, T] = Signal_GenerateSine(N+M(i), fs, 1, f);
+		[W, F] = myDFT(X, 1);
+		subplot(3, 1, i);
+		stem(F, abs(W));
+	end
+return	
 	N = 100;
 	M = 100;
 	fs = 100;
