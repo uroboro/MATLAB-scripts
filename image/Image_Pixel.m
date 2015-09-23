@@ -1,6 +1,11 @@
-function [ output_args ] = Image_Pixel( data, X, Y, rows, cols, exceptionType )
-%IMAGE_PIXEL Summary of this function goes here
-%   Detailed explanation goes here
+%Fetches the pixel at (X,Y) given an exception when the pixel is out of
+%bounds
+% Exception types:
+%	0: Echo   (Repeats closer row/column)
+%	1: Mirror (Mirrors image at boundaries)
+%	2: Toroid (Loops round the edges)
+function [ output_args ] = Image_Pixel( image, X, Y, exceptionType )
+	[rows, cols] = size(image);
 
 	switch (exceptionType)
 	case 0 % Echo
@@ -46,6 +51,6 @@ function [ output_args ] = Image_Pixel( data, X, Y, rows, cols, exceptionType )
 		end
 	end
 	
-	output_args = data(X,Y);
+	output_args = image(X,Y);
 end
 
