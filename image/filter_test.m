@@ -41,6 +41,6 @@
 	title('Laplaciano');
 	k = ones(5) / 5^2;
 	imshow(Image_Salt_Pepper(I,100));
-	timeD = toc
+	timeE = toc
 
 %end
