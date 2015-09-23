@@ -1,7 +1,4 @@
 %IMAGE_Filter Summary of this function goes here
-%   ExceptionType 0: Echo
-%   ExceptionType 1: Mirror
-%   ExceptionType 2: Toroid
 function [ output_args ] = Image_Filter( image, kernel, varargin )
 	defaults = [0];
 	for i = 1:length(varargin)
@@ -24,51 +21,8 @@ function [ output_args ] = Image_Filter( image, kernel, varargin )
 				for jj = -kernelRadius:kernelRadius
 					X = x + ii;
 					Y = y + jj;
-					switch (exceptionType)
-					case 0 % Echo
-						if (X < 1)
-							X = 1;
-						end
-						if (X > rows)
-							X = rows;
-						end
-						if (Y < 1)
-							Y = 1;
-						end
-						if (Y > cols)
-							Y = cols;
-						end
-	
-					case 1 % Mirror
-						if (X < 1)
-							X = 1 - X;
-						end
-						if (X > rows)
-							X = rows + 1 - (X - rows);
-						end
-						if (Y < 1)
-							Y = 1 - Y;
-						end
-						if (Y > cols)
-							Y = cols + 1 - (Y - cols);
-						end
 
-					case 3 % Toroid
-						if (X < 1)
-							X = rows + X;
-						end
-						if (X > rows)
-							X = X - rows;
-						end
-						if (Y < 1)
-							Y = cols + Y;
-						end
-						if (Y > cols)
-							Y = Y - cols;
-						end
-					end
-
-					p = image(X, Y);
+					p = Image_Pixel(image, X, Y, exceptionType);
 					k = kernel(kernelRadius + ii + 1, kernelRadius + jj + 1);
 					s = s + k * p;
 				end
