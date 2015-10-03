@@ -14,6 +14,8 @@ function [ output_args ] = Image_Filter( image, kernel, varargin )
 	[kernelSize, ~] = size(kernel);
 	kernelRadius = int16(floor(kernelSize/2));
 
+	Sum = sum(sum(kernel));
+	
 	for x = 1:rows
 		for y = 1:cols
 			s = uint16(0);
@@ -27,7 +29,11 @@ function [ output_args ] = Image_Filter( image, kernel, varargin )
 					s = s + k * p;
 				end
 			end
-			tmp(x, y) = double(s) / kernelSize^2;
+			if (Sum == 1 || Sum == 0)
+				tmp(x, y) = double(s);
+			else
+				tmp(x, y) = double(s) / Sum;
+			end
 		end
 	end
 	
