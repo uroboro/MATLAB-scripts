@@ -12,7 +12,7 @@ function [ output_args ] = testbench5( varargin )
 	N = [2^10, 2^11, 2^12, 2^13]; % Muestras
 
 	output_args = [];
-	
+
 	rows = 4;
 	for i = 1:length(N)
 		x = sqrt(varianza) * randn(N(i), R);
@@ -29,14 +29,14 @@ function [ output_args ] = testbench5( varargin )
 			X(:,ii) = 1 / N(i) * (abs(ffft2)).^2;
 			clear ffft2;
 		end
-		
+	
 		subplot(rows,1,2);
  		plot(X); title('Periodograma');
 
 		X_ = mean(X, 2);
 		subplot(rows,1,3);
 		plot(X_); title('mean Periodogram');
-		
+	
 		Y_ = var(X, 0, 2);
 		subplot(rows,1,4);
 		plot(Y_); title('var Periodogram');
