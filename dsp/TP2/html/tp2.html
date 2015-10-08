@@ -1,0 +1,328 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Trabajo Pr&aacute;ctico 2</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-10-08"><meta name="DC.source" content="tp2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Trabajo Pr&aacute;ctico 2</h1><!--introduction--><p>Ventanas y Fourier</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Ejercicio 1</a></li><li><a href="#10">Ejercicio 3</a></li></ul></div><h2>Ejercicio 1<a name="1"></a></h2><div><ul><li>Implementar ventanas</li></ul></div><p><b>Triangular</b></p><pre class="language-matlab">
+<span class="comment">% Ventana triangular</span>
+<span class="keyword">function</span> [ W ] = window_Triangular(N)
+	n = transpose(0:N-1);
+	W = 1 - abs(2 * n / (N + 1) - (N - 1) / (N + 1));
+<span class="keyword">end</span>
+
+</pre><pre class="codeinput">N = 128;
+w = window_Triangular(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title(<span class="string">'Ventana triangular'</span>);
+xlabel(<span class="string">'Muestra'</span>); xlim([0 N-1]);
+ylabel(<span class="string">'Magnitud [veces]'</span>);
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), w_fft);
+title(<span class="string">'Espectro ventana triangular'</span>);
+xlabel(<span class="string">'Frecuencia [bins]'</span>); xlim([-N/2 N/2-1]);
+ylabel(<span class="string">'Magnitud [veces]'</span>);
+
+<span class="comment">% A diferencia de los siguientes espectros, &eacute;ste se encuentra medido en</span>
+<span class="comment">% veces debido a un problema visual que no muestra valores fuera de [-1 1].</span>
+</pre><img vspace="5" hspace="5" src="tp2_01.png" alt=""> <p><b>Hann</b></p><pre class="language-matlab">
+<span class="comment">% Ventana Hann</span>
+<span class="keyword">function</span> [ W ] = window_Hann(N)
+	n = transpose(0:N-1);
+	W = (1 - cos(2 * pi * n / (N - 1))) / 2;
+<span class="keyword">end</span>
+
+</pre><pre class="codeinput">N = 128;
+w = window_Hann(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title(<span class="string">'Ventana Hann'</span>);
+xlabel(<span class="string">'Muestra'</span>); xlim([0 N-1]);
+ylabel(<span class="string">'Magnitud [veces]'</span>);
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), 20*log(w_fft)); grid <span class="string">on</span>;
+title(<span class="string">'Espectro ventana triangular'</span>);
+xlabel(<span class="string">'Frecuencia [bins]'</span>); xlim([-N/2 N/2-1]);
+ylabel(<span class="string">'Magnitud [dB]'</span>);
+</pre><img vspace="5" hspace="5" src="tp2_02.png" alt=""> <p><b>Flat-top</b></p><pre class="language-matlab">
+<span class="comment">% Ventana Flat-top</span>
+<span class="keyword">function</span> [ W ] = window_Flat_top(N)
+	n = transpose(0:N-1);
+	a0 = 1;
+	a1 = 1.93;
+	a2 = 1.29;
+	a3 = 0.388;
+	a4 = 0.032;
+	W = a0 - a1 * cos(2 * pi * n / (N - 1)) + a2 * cos(4 * pi * n / (N - 1)) - a3 * cos(6 * pi * n / (N - 1)) + a4 * cos(8 * pi * n / (N - 1));
+<span class="keyword">end</span>
+
+</pre><pre class="codeinput">N = 128;
+w = window_Flat_top(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title(<span class="string">'Ventana Flat-top'</span>);
+xlabel(<span class="string">'Muestra'</span>); xlim([0 N-1]);
+ylabel(<span class="string">'Magnitud [veces]'</span>);
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), 20*log(w_fft)); grid <span class="string">on</span>;
+title(<span class="string">'Espectro ventana triangular'</span>);
+xlabel(<span class="string">'Frecuencia [bins]'</span>); xlim([-N/2 N/2-1]);
+ylabel(<span class="string">'Magnitud [dB]'</span>);
+</pre><img vspace="5" hspace="5" src="tp2_03.png" alt=""> <p><b>Blackman-Harris</b></p><pre class="language-matlab">
+<span class="comment">% Ventana Blackman-Harris</span>
+<span class="keyword">function</span> [ W ] = window_BlackmanHarris(N)
+	n = transpose(0:N-1);
+	a0 = 0.35875;
+	a1 = 0.48829;
+	a2 = 0.14128;
+	a3 = 0.01168;
+	W = a0 - a1 * cos(2 * pi * n / (N - 1)) + a2 * cos(4 * pi * n / (N - 1)) - a3 * cos(6 * pi * n / (N - 1));
+<span class="keyword">end</span>
+
+</pre><pre class="codeinput">N = 128;
+w = window_BlackmanHarris(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title(<span class="string">'Ventana Blackman-Harris'</span>);
+xlabel(<span class="string">'Muestra'</span>); xlim([0 N-1]);
+ylabel(<span class="string">'Magnitud [veces]'</span>);
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), 20*log(w_fft)); grid <span class="string">on</span>;
+title(<span class="string">'Espectro ventana triangular'</span>);
+xlabel(<span class="string">'Frecuencia [bins]'</span>); xlim([-N/2 N/2-1]);
+ylabel(<span class="string">'Magnitud [dB]'</span>);
+</pre><img vspace="5" hspace="5" src="tp2_04.png" alt=""> <h2>Ejercicio 3<a name="10"></a></h2><div><ul><li>Errores de medici&oacute;n</li></ul></div><pre class="codeinput">N = 128;
+fs = 1e3;
+df = fs/N;
+R = 200;
+Y = zeros(N, R);
+
+<span class="keyword">for</span> j = 1:R
+	fr = 4 * rand - 2;
+	f = N/4 * df + fr;
+	[X, T] = Signal_GenerateSine(N, fs, 1, f);
+	Y(:,j) = fft(X);
+<span class="keyword">end</span>
+
+Y_ = abs(fft(Signal_GenerateSine(N, fs, 1, N/4 * df)));
+
+P = 1:N;
+y_abs = abs(Y);
+<span class="comment">% P = 1:N/2;</span>
+<span class="comment">% y_abs = y_abs(P,:);</span>
+
+subplot(1, 1, 1);
+plot(P-1, y_abs(:,1));
+hold <span class="string">on</span>;
+<span class="keyword">for</span> j = 2:R
+	plot(P-1, y_abs(:,j));
+<span class="keyword">end</span>
+hold <span class="string">off</span>;
+title(<span class="string">'Espectro se&ntilde;al bitonal'</span>);
+xlabel(<span class="string">'Frecuencia [bins]'</span>); xlim([1 N/2-1]);
+ylabel(<span class="string">'Magnitud [veces]'</span>);
+
+err = zeros(R, 1);
+<span class="keyword">for</span> j = 1:R
+	err(j) = y_abs(N/4, j)^2 - Y_(N/4)^2;
+<span class="keyword">end</span>
+err = sqrt(mean(err));
+<span class="comment">% plot(0:R-1, err);</span>
+</pre><img vspace="5" hspace="5" src="tp2_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Trabajo Práctico 2
+% Ventanas y Fourier
+
+%% Ejercicio 1
+% * Implementar ventanas
+%%
+% *Triangular*
+%%
+% <include>window_Triangular.m</include>
+
+N = 128;
+w = window_Triangular(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title('Ventana triangular');
+xlabel('Muestra'); xlim([0 N-1]);
+ylabel('Magnitud [veces]');
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), w_fft);
+title('Espectro ventana triangular');
+xlabel('Frecuencia [bins]'); xlim([-N/2 N/2-1]);
+ylabel('Magnitud [veces]');
+
+% A diferencia de los siguientes espectros, éste se encuentra medido en
+% veces debido a un problema visual que no muestra valores fuera de [-1 1].
+
+%%
+% *Hann*
+%%
+% <include>window_Hann.m</include>
+
+N = 128;
+w = window_Hann(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title('Ventana Hann');
+xlabel('Muestra'); xlim([0 N-1]);
+ylabel('Magnitud [veces]');
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), 20*log(w_fft)); grid on;
+title('Espectro ventana triangular');
+xlabel('Frecuencia [bins]'); xlim([-N/2 N/2-1]);
+ylabel('Magnitud [dB]');
+
+%%
+% *Flat-top*
+%%
+% <include>window_Flat_top.m</include>
+
+N = 128;
+w = window_Flat_top(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title('Ventana Flat-top');
+xlabel('Muestra'); xlim([0 N-1]);
+ylabel('Magnitud [veces]');
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), 20*log(w_fft)); grid on;
+title('Espectro ventana triangular');
+xlabel('Frecuencia [bins]'); xlim([-N/2 N/2-1]);
+ylabel('Magnitud [dB]');
+
+%%
+% *Blackman-Harris*
+%%
+% <include>window_BlackmanHarris.m</include>
+
+N = 128;
+w = window_BlackmanHarris(N);
+subplot(2, 1, 1); plot(0:N-1, w);
+title('Ventana Blackman-Harris');
+xlabel('Muestra'); xlim([0 N-1]);
+ylabel('Magnitud [veces]');
+
+w_fft = abs(fft(w));
+w_fft = [w_fft(N/2+1:N) ; w_fft(1:N/2)];
+subplot(2, 1, 2); plot(transpose(-N/2:N/2-1), 20*log(w_fft)); grid on;
+title('Espectro ventana triangular');
+xlabel('Frecuencia [bins]'); xlim([-N/2 N/2-1]);
+ylabel('Magnitud [dB]');
+
+
+
+%% Ejercicio 3
+% * Errores de medición
+
+N = 128;
+fs = 1e3;
+df = fs/N;
+R = 200;
+Y = zeros(N, R);
+
+for j = 1:R
+	fr = 4 * rand - 2;
+	f = N/4 * df + fr;
+	[X, T] = Signal_GenerateSine(N, fs, 1, f);
+	Y(:,j) = fft(X);
+end
+
+Y_ = abs(fft(Signal_GenerateSine(N, fs, 1, N/4 * df)));
+
+P = 1:N;
+y_abs = abs(Y);
+% P = 1:N/2;
+% y_abs = y_abs(P,:);
+
+subplot(1, 1, 1);
+plot(P-1, y_abs(:,1));
+hold on;
+for j = 2:R
+	plot(P-1, y_abs(:,j));
+end
+hold off;
+title('Espectro señal bitonal');
+xlabel('Frecuencia [bins]'); xlim([1 N/2-1]);
+ylabel('Magnitud [veces]');
+
+err = zeros(R, 1);
+for j = 1:R
+	err(j) = y_abs(N/4, j)^2 - Y_(N/4)^2;
+end
+err = sqrt(mean(err));
+% plot(0:R-1, err);
+
+##### SOURCE END #####
+--></body></html>
