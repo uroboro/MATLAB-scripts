@@ -3,7 +3,7 @@ function [ output_args ] = my_median( x, L )
 	N = length(x);
 	X = x;
 	for n = 1:N
-		x_ = [];
+		x_ = zeros(L,1);
 		for i = -floor(L/2) : floor(L/2)
 			n_ = n + i;
 			if (n_ < 1)
@@ -11,7 +11,7 @@ function [ output_args ] = my_median( x, L )
 			elseif (n_ > N)
 				n_ = n_ - N;
 			end
-			x_ = [x_; x(n_)];
+			x_(i + floor(L/2) + 1) = x(n_);
 		end
 		X(n) = median(x_);
 	end
