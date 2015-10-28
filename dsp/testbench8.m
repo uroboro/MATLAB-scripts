@@ -1,3 +1,4 @@
+f = 1;
 load('TP3_ecg.mat');
 egc_L = length(ecg_lead);
 D = 1;
@@ -21,19 +22,26 @@ X = zeros(qi_min+1,qi_L);
 i = -floor(qi_min/2) : floor(qi_min/2);
 for n = 1:qi_L
 	X(:,n) = ecg(qi(n) + i + 1);
-end; clear n i;
-plot(X);
+end; clear n;
+clear i;
 
 M = mean(X);
 for n = 1:qi_L
 	X(:,n) = X(:,n) - M(n);
 end; clear n;
 clear M;
-figure;
-plot(X);
+%figure(f); f = f + 1;
+%plot(X);
+
+M = mean(X, 2);
+figure(f); f = f + 1;
+plot(M);
+
 
 clear egc_L D R qi qi_L Qi qi_min X;
+
 if (0)
+	figure;
 	plot(ecg);
 	%axis([R(1), R(end), min(ecg), max(ecg)]);
 	hold on;
